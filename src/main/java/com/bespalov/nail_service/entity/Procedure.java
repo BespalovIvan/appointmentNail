@@ -1,12 +1,18 @@
 package com.bespalov.nail_service.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@Table(name = "procedures")
 public class Procedure {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,4 +21,17 @@ public class Procedure {
     private String name;
     @Column(name = "price")
     private Long price;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Procedure procedure = (Procedure) o;
+        return Objects.equals(id, procedure.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }

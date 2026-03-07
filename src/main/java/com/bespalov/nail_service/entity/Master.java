@@ -1,13 +1,19 @@
 package com.bespalov.nail_service.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@Table(name = "masters")
 public class Master {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,6 +29,19 @@ public class Master {
             inverseJoinColumns = @JoinColumn(name = "procedure_id")
     )
     private List<Procedure> procedureList;
-    @OneToMany
+    @OneToMany(mappedBy = "master", cascade = CascadeType.ALL)
     private List<Appointment> appointments;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Master master = (Master) o;
+        return Objects.equals(id, master.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
