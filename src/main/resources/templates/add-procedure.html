@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление новой услуги</title>
+</head>
+<body>
+<h2>Добавить новую услугу</h2>
+
+<form th:action="@{/add-procedure}" th:object="${procedureDto}" method="post">
+
+    <div>
+        <label>Название:</label>
+        <input type="text" th:field="*{name}" required/>
+    </div>
+
+    <div>
+        <label>Стоимость:</label>
+        <input type="number" th:field="*{price}" required/>
+    </div>
+
+    <br/>
+    <button type="submit">Добавить услугу</button>
+</form>
+
+<br/>
+<a href="/">На главную</a>
+</body>
+</html>

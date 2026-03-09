@@ -32,6 +32,11 @@ public class Master {
     @OneToMany(mappedBy = "master", cascade = CascadeType.ALL)
     private List<Appointment> appointments;
 
+    public Master(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

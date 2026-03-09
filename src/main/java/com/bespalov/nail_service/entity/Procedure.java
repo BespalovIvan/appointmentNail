@@ -22,6 +22,11 @@ public class Procedure {
     @Column(name = "price")
     private Long price;
 
+    public Procedure(String name, Long price) {
+        this.name = name;
+        this.price = price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

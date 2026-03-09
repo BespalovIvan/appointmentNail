@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация мастера</title>
+</head>
+<body>
+<h2>Добавить нового мастера</h2>
+
+<form th:action="@{/add-master}" th:object="${masterDto}" method="post">
+
+    <div>
+        <label>Имя:</label>
+        <input type="text" th:field="*{firstName}" required/>
+    </div>
+
+    <div>
+        <label>Фамилия:</label>
+        <input type="text" th:field="*{lastName}" required/>
+    </div>
+
+    <br/>
+    <button type="submit">Зарегистрировать мастера</button>
+</form>
+
+<br/>
+<a href="/">На главную</a>
+</body>
+</html>
