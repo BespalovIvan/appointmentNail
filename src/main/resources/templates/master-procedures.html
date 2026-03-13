@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <h2>Услуги мастера: <span th:text="${master.firstName}"></span></h2>
+</head>
+<body>
+<br/>
+<a th:href="@{/master/{id}/edit-procedures(id=${master.id})}">
+    <button type="button">Изменить список услуг</button>
+</a>
+<br/><br/>
+    <tbody>
+    <tr th:each="procedure : ${master.procedureList}">
+        <td th:text="${procedure.name}">Название</td>
+        <td th:text="${procedure.price}">Цена</td>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+<a href="/">На главную</a>
+<a href="/masters">Назад к списку мастеров</a>
+</body>
+</html>

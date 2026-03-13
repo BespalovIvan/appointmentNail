@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование услуг мастера</title>
+    <style>
+        .procedure-item {
+            margin-bottom: 10px;
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        label {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h2>Редактирование услуг для мастера:
+    <span th:text="${master.firstName} + ' ' + ${master.lastName}">Имя Мастера</span>
+</h2>
+
+<p>Выберите услуги из общего списка:</p>
+
+<form th:action="@{/master/{id}/edit-procedures(id=${master.id})}" method="post">
+
+    <div th:each="procedure : ${procedures}" class="procedure-item">
+        <input type="checkbox"
+               name="selectedProcedures"
+               th:id="${'proc-' + procedure.id}"
+               th:value="${procedure.id}"
+               th:checked="${master.procedureList.contains(procedure)}" />
+
+        <label th:for="${'proc-' + procedure.id}"
+               th:text="${procedure.name} + ' — ' + ${procedure.price} + ' руб.'">
+            Название услуги — 000 руб.
+        </label>
+    </div>
+
+    <br/>
+    <button type="submit">Сохранить изменения</button>
+    <a th:href="@{/master/{id}/procedures(id=${master.id})}">
+        <button type="button">Отмена</button>
+    </a>
+</form>
+
+<br/>
+<hr/>
+<a href="/masters">Назад к списку мастеров</a> |
+<a href="/">На главную</a>
+</body>
+</html>

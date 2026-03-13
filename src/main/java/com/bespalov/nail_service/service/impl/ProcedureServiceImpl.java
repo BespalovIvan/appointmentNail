@@ -29,7 +29,7 @@ public class ProcedureServiceImpl implements ProcedureService {
         List<ProcedureDto> procedureDtoList = new ArrayList<>();
         List<Procedure> procedureList = procedureRepo.findAll();
         for (Procedure procedure : procedureList) {
-            procedureDtoList.add(new ProcedureDto(procedure.getName(), procedure.getPrice()));
+            procedureDtoList.add(new ProcedureDto(procedure.getId(), procedure.getName(), procedure.getPrice()));
         }
         return procedureDtoList;
     }

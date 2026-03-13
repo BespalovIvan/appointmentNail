@@ -31,7 +31,7 @@ public class ClientServiceImpl implements ClientService {
         List<Client> clientList = clientRepo.findAll();
         List<ClientDto> clientDtos = new ArrayList<>();
         for (Client client : clientList) {
-            clientDtos.add(new ClientDto(client.getFirstName(), client.getLastName(), client.getPhoneNumber()));
+            clientDtos.add(new ClientDto(client.getId(), client.getFirstName(), client.getLastName(), client.getPhoneNumber()));
         }
         return clientDtos;
     }

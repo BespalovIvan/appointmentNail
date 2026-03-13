@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Список мастеров</title>
+</head>
+<body>
+<h2>Наши мастера</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Действие</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="master : ${masters}">
+        <td th:text="${master.firstName}">Имя</td>
+        <td th:text="${master.lastName}">Фамилия</td>
+        <td>
+            <a th:href="@{/master/{id}/procedures(id=${master.id})}">Услуги</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+<a href="/">На главную</a>
+</body>
+</html>
