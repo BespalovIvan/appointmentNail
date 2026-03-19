@@ -28,10 +28,11 @@
                name="selectedProcedures"
                th:id="${'proc-' + procedure.id}"
                th:value="${procedure.id}"
-               th:checked="${master.procedureList.contains(procedure)}" />
+               th:checked="${master.procedureList.contains(procedure)}"/>
 
         <label th:for="${'proc-' + procedure.id}"
-               th:text="${procedure.name} + ' — ' + ${procedure.price} + ' руб.'">
+               th:text="${procedure.name} + ' — ' + ${procedure.price} + ' руб.' + ' Длительность процедуры '
+               + ${procedure.durationMinutes} + ' минут'">
             Название услуги — 000 руб.
         </label>
     </div>

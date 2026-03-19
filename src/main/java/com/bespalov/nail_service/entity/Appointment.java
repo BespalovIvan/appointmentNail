@@ -31,6 +31,13 @@ public class Appointment {
     @Column(name = "date_of_procedure")
     private LocalDateTime dateOfProcedure;
 
+    public Appointment(Client client, Master master, Procedure procedure, LocalDateTime dateOfProcedure) {
+        this.client = client;
+        this.master = master;
+        this.procedure = procedure;
+        this.dateOfProcedure = dateOfProcedure;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -13,6 +13,7 @@
     <tr th:each="procedure : ${master.procedureList}">
         <td th:text="${procedure.name}">Название</td>
         <td th:text="${procedure.price}">Цена</td>
+        <td th:text="${procedure.durationMinutes}">Длительность процедуры</td>
     </tr>
     </tbody>
 </table>

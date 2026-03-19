@@ -24,9 +24,7 @@ public class MasterServiceImpl implements MasterService {
     @Override
     public MasterDto saveMaster(MasterDto masterDto) {
         Master master = masterRepo.save(new Master(masterDto.getFirstName(), masterDto.getLastName()));
-        MasterDto masterDtoResult = new MasterDto(master.getId(), master.getFirstName(), master.getLastName());
-        return masterDto;
-
+        return new MasterDto(master.getId(), master.getFirstName(), master.getLastName());
     }
 
     @Override
@@ -45,7 +43,8 @@ public class MasterServiceImpl implements MasterService {
         List<Procedure> procedureList = master.getProcedureList();
         List<ProcedureDto> procedureDtoList = new ArrayList<>();
         for (Procedure procedure : procedureList) {
-            procedureDtoList.add(new ProcedureDto(procedure.getId(), procedure.getName(), procedure.getPrice()));
+            procedureDtoList.add(new ProcedureDto(procedure.getId(), procedure.getName(), procedure.getPrice(),
+                    procedure.getDurationMinutes()));
         }
         return new MasterDto(master.getId(), master.getFirstName(), master.getLastName(), procedureDtoList);
     }

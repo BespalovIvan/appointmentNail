@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись на процедуру</title>
+    <style>
+        .error-message { color: white; background-color: #ff4d4d; padding: 10px; border-radius: 5px; margin-bottom: 15px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; }
+    </style>
+</head>
+<body>
+<h2>Новая запись на услугу</h2>
+
+<div th:if="${errorMessage}" class="error-message">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+<form th:action="@{/make-appointment}" th:object="${appointmentDto}" method="post">
+
+    <div class="form-group">
+        <label>Клиент:</label>
+        <select th:field="*{clientId}" required>
+            <option value="">-- Выберите клиента --</option>
+            <option th:each="c : ${clients}" th:value="${c.id}" th:text="${c.firstName + ' ' + c.lastName}"></option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Мастер:</label>
+        <select th:field="*{masterId}" required>
+            <option value="">-- Выберите мастера --</option>
+            <option th:each="m : ${masters}" th:value="${m.id}" th:text="${m.firstName + ' ' + m.lastName}"></option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Услуга:</label>
+        <select th:field="*{procedureId}" required>
+            <option value="">-- Выберите услугу --</option>
+            <option th:each="p : ${procedures}" th:value="${p.id}"
+                    th:text="${p.name + ' (' + p.durationMinutes + ' мин)'}"></option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Дата и время:</label>
+        <input type="datetime-local" th:field="*{dateOfProcedure}" required />
+    </div>
+
+    <button type="submit">Записать</button>
+</form>
+
+<br>
+<a href="/">На главную</a>
+</body>
+</html>

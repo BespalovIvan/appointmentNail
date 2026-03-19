@@ -16,6 +16,7 @@ public class ProcedureDto {
     private UUID id;
     private String name;
     private Long price;
+    private Integer durationMinutes;
 
     @Override
     public boolean equals(Object o) {

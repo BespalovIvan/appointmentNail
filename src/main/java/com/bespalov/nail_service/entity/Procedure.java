@@ -23,10 +23,13 @@ public class Procedure {
     private String name;
     @Column(name = "price")
     private Long price;
+    @Column(name = "duration_minutes", nullable = false)
+    private Integer durationMinutes;
 
-    public Procedure(String name, Long price) {
+    public Procedure(String name, Long price, Integer durationMinutes) {
         this.name = name;
         this.price = price;
+        this.durationMinutes = durationMinutes;
     }
 
     @Override

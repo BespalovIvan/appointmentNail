@@ -21,7 +21,8 @@ public class ProcedureServiceImpl implements ProcedureService {
         if (procedureRepo.existsByName(procedureDto.getName())) {
             throw new RegistrationException("Услуга уже создана!");
         }
-        return procedureRepo.save(new Procedure(procedureDto.getName(), procedureDto.getPrice()));
+        return procedureRepo.save(new Procedure(procedureDto.getName(), procedureDto.getPrice(),
+                procedureDto.getDurationMinutes()));
     }
 
     @Override
@@ -29,7 +30,8 @@ public class ProcedureServiceImpl implements ProcedureService {
         List<ProcedureDto> procedureDtoList = new ArrayList<>();
         List<Procedure> procedureList = procedureRepo.findAll();
         for (Procedure procedure : procedureList) {
-            procedureDtoList.add(new ProcedureDto(procedure.getId(), procedure.getName(), procedure.getPrice()));
+            procedureDtoList.add(new ProcedureDto(procedure.getId(), procedure.getName(), procedure.getPrice(),
+                    procedure.getDurationMinutes()));
         }
         return procedureDtoList;
     }
