@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список записей</title>
+    <style>
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        tr:hover { background-color: #f9f9f9; }
+    </style>
+</head>
+<body>
+<h2>Все записи на процедуры</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Дата и время</th>
+        <th>Клиент</th>
+        <th>Мастер</th>
+        <th>Услуга</th>
+        <th>Длительность</th>
+        <th>Действие</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="app : ${appointments}">
+        <td th:text="${#temporals.format(app.dateOfProcedure, 'dd.MM.yyyy HH:mm')}">Дата</td>
+
+        <td th:text="${app.client.firstName + ' ' + app.client.lastName}">Клиент</td>
+        <td th:text="${app.master.firstName + ' ' + app.master.lastName}">Мастер</td>
+        <td th:text="${app.procedure.name}">Услуга</td>
+        <td th:text="${app.procedure.durationMinutes + ' мин'}">Длительность</td>
+        <td>
+            <form th:action="@{/appointments/delete/{id}(id=${app.id})}" method="post">
+                <button type="submit" onclick="return confirm('Удалить запись?')">Отменить</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a href="/make-appointment">Записать нового клиента</a> |
+<a href="/">На главную</a>
+</body>
+</html>

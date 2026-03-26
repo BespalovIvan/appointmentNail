@@ -16,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -41,5 +43,15 @@ public class AppointmentServiceImpl implements AppointmentService {
         Master master = masterRepo.findById(appointmentDto.getMasterId())
                 .orElseThrow(() -> new DbException("Мастер не найден"));
         appointmentRepo.save(new Appointment(client, master, procedure, appointmentDto.getDateOfProcedure()));
+    }
+
+    @Override
+    public List<Appointment> getAllAppointment() {
+        return appointmentRepo.findAll();
+    }
+
+    @Override
+    public void deleteAppointment(UUID appointmentId) {
+        appointmentRepo.deleteById(appointmentId);
     }
 }

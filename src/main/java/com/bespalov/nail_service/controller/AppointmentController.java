@@ -10,7 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -37,5 +40,15 @@ public class AppointmentController {
         return "redirect:/?success=true";
     }
 
+    @GetMapping("/appointments")
+    public String showAllAppointment(Model model) {
+        model.addAttribute("appointments", appointmentService.getAllAppointment());
+        return "appointments-list";
+    }
 
+    @PostMapping("/appointments/delete/{appointmentId}")
+    public String deleteAppointment(@PathVariable UUID appointmentId) {
+        appointmentService.deleteAppointment(appointmentId);
+        return "redirect:/appointments";
+    }
 }
