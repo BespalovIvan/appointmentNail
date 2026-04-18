@@ -33,6 +33,17 @@ public class User implements UserDetails {
     private Role role;
     @Column(name = "person_id")
     private UUID personId;
+    @Column(name = "display_name")
+    private String displayName;
+
+    public User(String username, String password, boolean isEnabled, Role role, UUID personId, String displayName) {
+        this.username = username;
+        this.password = password;
+        this.isEnabled = isEnabled;
+        this.role = role;
+        this.personId = personId;
+        this.displayName = displayName;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

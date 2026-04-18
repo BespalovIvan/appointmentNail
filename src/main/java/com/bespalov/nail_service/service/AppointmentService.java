@@ -8,6 +8,9 @@ import java.util.UUID;
 
 public interface AppointmentService {
     void createAppointment(AppointmentDto appointmentDto);
+
     List<Appointment> getAllAppointment();
+
     void deleteAppointment(UUID appointmentId);
+
 }

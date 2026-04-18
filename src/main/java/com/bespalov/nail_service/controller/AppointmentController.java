@@ -1,11 +1,13 @@
 package com.bespalov.nail_service.controller;
 
 import com.bespalov.nail_service.dto.AppointmentDto;
+import com.bespalov.nail_service.entity.User;
 import com.bespalov.nail_service.service.AppointmentService;
 import com.bespalov.nail_service.service.ClientService;
 import com.bespalov.nail_service.service.MasterService;
 import com.bespalov.nail_service.service.ProcedureService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,8 +43,14 @@ public class AppointmentController {
     }
 
     @GetMapping("/appointments")
-    public String showAllAppointment(Model model) {
-        model.addAttribute("appointments", appointmentService.getAllAppointment());
+    public String showAllAppointment(Model model, @AuthenticationPrincipal User user) {
+        switch (user.getRole()) {
+            case ROLE_ADMIN -> model.addAttribute("appointments",
+                    appointmentService.getAllAppointment());
+            case ROLE_MASTER -> model.addAttribute("appointments",
+                    masterService.getAllAppointmentByMasterId(user.getPersonId()));
+        }
+
         return "appointments-list";
     }
 

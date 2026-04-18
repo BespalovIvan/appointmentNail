@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public interface AppointmentRepo extends JpaRepository<Appointment, UUID> {
@@ -22,4 +23,6 @@ public interface AppointmentRepo extends JpaRepository<Appointment, UUID> {
             @Param("newStart") LocalDateTime newStart,
             @Param("newEnd") LocalDateTime newEnd
     );
+
+    List<Appointment> findAllByMasterId(UUID masterId);
 }
