@@ -3,6 +3,7 @@ package com.bespalov.nail_service.controller;
 import com.bespalov.nail_service.dto.ProcedureDto;
 import com.bespalov.nail_service.service.ProcedureService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +16,14 @@ public class ProcedureController {
     private final ProcedureService procedureService;
 
     @GetMapping("/add-procedure")
+    @PreAuthorize("hasRole('ADMIN')")
     public String showAddProcedureForm(Model model) {
         model.addAttribute("procedureDto", new ProcedureDto());
         return "add-procedure";
     }
 
     @PostMapping("/add-procedure")
+    @PreAuthorize("hasRole('ADMIN')")
     public String addNewProcedure(@ModelAttribute ProcedureDto procedureDto) {
         procedureService.saveProcedure(procedureDto);
         return "redirect:/";

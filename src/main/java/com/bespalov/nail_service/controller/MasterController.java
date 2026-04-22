@@ -4,6 +4,7 @@ import com.bespalov.nail_service.dto.MasterDto;
 import com.bespalov.nail_service.service.MasterService;
 import com.bespalov.nail_service.service.ProcedureService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +19,14 @@ public class MasterController {
     private final ProcedureService procedureService;
 
     @GetMapping("/add-master")
+    @PreAuthorize("hasRole('ADMIN')")
     public String showAddMasterForm(Model model) {
         model.addAttribute("masterDto", new MasterDto());
         return "add-master";
     }
 
     @PostMapping("/add-master")
+    @PreAuthorize("hasRole('ADMIN')")
     public String registerMaster(@ModelAttribute MasterDto masterDto) {
         masterService.saveMaster(masterDto);
         return "redirect:/";
